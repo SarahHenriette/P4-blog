@@ -1,0 +1,13 @@
+.chapitre{
+    background-color:rgb(235, 218, 192);
+    width: 50%;
+    height: 300px;
+    margin-bottom: 20px ;
+}
+
+.billet{
+    overflow: hidden;
+    background-color: red;
+   
+    height: 275px;
+}
