@@ -7,10 +7,20 @@
 
 .billet{
     overflow: hidden;
-
+    background-color: sandybrown;
     height: 275px;
 }
 
 .commentaire{
     background-color: salmon;
+    width: 50%;
+    height: 100px;
+}
+
+.nouveauBillet{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+
 }
