@@ -14,7 +14,6 @@
     <label name="contenu">Contenu</label>
     <textarea cols=50 rows=5 name="Contenue"></textarea>
     <input type="submit" name="Valider" id="Valider" value="Valider">
-    
     </form>
 
 

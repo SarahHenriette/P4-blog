@@ -12,34 +12,28 @@
 <h2>Chapitre <?php echo $_GET["billet"] ?></h2>
 <?php
 
-$bdd = new PDO('mysql:host=localhost;dbname=blog; charset=utf8', 'root', '');
-$req =$bdd->prepare('SELECT * FROM billets WHERE id=? ');
-$req->execute(array( $_GET["billet"]));
-if(isset($_GET['billet'])){
-    while($donnee = $req->fetch()){
-     echo $donnee["titre"];
-     echo $donnee["date_creation"];
-   echo $donnee["contenue"];
+require_once('baseDeDonnee.php');
+require_once('models/Billet.php');
+require_once('models/Commentaire.php');
 
-    }
-}
+ //Affiche le billet       
+$bdd = connexionBaseDeDonnee();
+$billet = new Billet;
+$commentaire= new Commentaire;
+
+$billet->recupereUn($_GET["billet"]);
 ?>
+
+
 <h2>Commentaires</h2>
 
 <?php
-$requete =$bdd->prepare('SELECT * FROM commentaires WHERE id_billet=? ORDER BY date_commentaire DESC ');
-$requete->execute(array( $_GET["billet"]));
-while($donnees = $requete->fetch()){
-?>
-<div class="commentaire">
- <p><?php echo  $donnees["pseudo"];?></p>
- <p><?php echo $donnees["commentaire"];?></p>
- <p><?php echo "publié le " . $donnees["date_commentaire"];?></p>
-</div>
-<?php
- }
-?>
 
+//Affiche les commentaires
+
+$commentaire-> recupere($_GET["billet"]);
+
+?>
 
 <h3>Connecte-toi pour rajouter un commentaire</h3>
 

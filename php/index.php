@@ -13,32 +13,39 @@
 
 <body>
 
-    <header></header>
+    <header>
+    <form action="pageAdministrateur.php?mdp=" method="POST">
+
+    <input type="text" name="nom" id="nom" placeholder="Nom">
+    <input type="password" name="motDePasse" placeholder="Mot de passe">
+    <input type="submit" value="Connexion">
+    
+    <form>
+    
+    </header>
     <nav></nav>
     <section>
         <h1>Billet simple pour l'Alaska de Jean Forteroche</h1>
     </section>
     <section>
         <?php
-            $bdd = new PDO('mysql:host=localhost;dbname=blog; charset=utf8', 'root', '');
-            $req =$bdd->query('SELECT * FROM billets');
-            while($donnee = $req->fetch()){
-                ?>
-                <div class="chapitre">
-                <div class="billet">
 
-                <h2><?php echo $donnee["titre"];?> </h2>
-                <p><?php echo $donnee["date_creation"];?></p>
-                <p> <?php echo $donnee["contenue"];?></p>
+            require_once('baseDeDonnee.php');
+            require_once('models/Billet.php');
+            $billet = new Billet;
+//Connexion a la base de donnee 
+            connexionBaseDeDonnee();
+             $billet->recupereTout();
+            
+            
+//Affichage des billets
+?>
 
-            </div>
-            <a href="afficheChapitreEtCommentaire.php?billet=<?php echo $donnee["id"];?>">commentaires</a>
+           <?php $billet->afficher();?>
+                
         </div>
 
-        <?php    
-            }
-
-        ?>
+       
 
     </section>
     <section></section>

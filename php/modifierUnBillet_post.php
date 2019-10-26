@@ -1,14 +1,11 @@
-
 <?php
-
 require_once('baseDeDonnee.php');
 require_once('models/Billet.php');
+$billet = new Billet;  
 
 $bdd = connexionBaseDeDonnee();
-$billet= new Billet;
 
-$billet->creer();
-
+$billet->modifier();
 
 redirection('pageAdministrateur.php?mdp=Forteroche');
 
