@@ -21,7 +21,8 @@ $bdd = connexionBaseDeDonnee();
 $billet = new Billet;
 $commentaire= new Commentaire;
 
-$billet->recupereUn($_GET["billet"]);
+$billet->recupereUn("id=?",$_GET["billet"]);
+$billet->afficherUn();
 ?>
 
 
@@ -31,7 +32,8 @@ $billet->recupereUn($_GET["billet"]);
 
 //Affiche les commentaires
 
-$commentaire-> recupere($_GET["billet"]);
+$commentaire-> recupereUn("id_billet =?", $_GET["billet"]);
+$commentaire->afficher();
 
 ?>
 

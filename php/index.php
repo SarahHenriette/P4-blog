@@ -35,7 +35,7 @@
             $billet = new Billet;
 //Connexion a la base de donnee 
             connexionBaseDeDonnee();
-             $billet->recupereTout();
+            $billet->recupereTout();
             
             
 //Affichage des billets

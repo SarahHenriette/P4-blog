@@ -35,8 +35,8 @@ $resultat = $admin->fetch();
     if( $_GET["mdp"] === $admin["mot_de_passe"] || $_POST["motDePasse"] === $admin["mot_de_passe"]){
         //AFFICHE TOUT LES BILLETS AVEC POSSIBILITES DE SUPPRIMER OU MODIFIER
 
-        
         $billet->recupereTout();
+
 
         $billet->afficherPageAdmin();
         ?>   

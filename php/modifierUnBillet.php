@@ -4,8 +4,8 @@ require_once('models/Billet.php');
 $billet = new Billet;
 
 $bdd = connexionBaseDeDonnee();
-
-$donnee = $billet->recupereUnSansAffichage($_GET["billet"]);
+$billet->recupereUn("id=?",$_GET["billet"]);
+$donnee = $billet->renvoieDonneeUn();
 
 ?>
 
