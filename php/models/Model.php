@@ -1,24 +1,28 @@
 <?php
-require_once('baseDeDonnee.php');
-class Model{
+
+namespace Models;
+
+abstract class Model{
 
     protected $bdd;
     protected $table; 
     protected $requete;
 
     public function __construct(){
-        $this->bdd = connexionBaseDeDonnee();
+        $this->bdd = \BaseDeDonnee::connexionBaseDeDonnee();
         
     }//construct
 
 
 
     public function recupereTout(){
-        $this->requete= $this->bdd->query('SELECT * FROM billets ORDER BY date_creation DESC');
+        $this->requete= $this->bdd->query("SELECT * FROM {$this->table} ORDER BY date_creation DESC");
+        return $this->requete;
 
     }
 
-    public function recupereUn(?string $where="",$id){
+
+    public function recupereUn(?string$where="",$id){
 
     $req="SELECT * FROM {$this->table}";
 
@@ -28,9 +32,27 @@ class Model{
 
         $this->requete =$this->bdd->prepare($req);
         $this->requete->execute(array( $id));
-      
+      return $this->requete;
 
-    }//function
+    }
+
+    public function supprimer($id){
+        $this->requete = $this->bdd->prepare("DELETE FROM {$this->table} WHERE id=?");
+        $this->requete->execute(array($id));
+    }
+
+
+    public function ajouter(string $champ, string $valeur){
+        $this->requete = $this->bdd->prepare("INSERT INTO {$this->table} ($champ) VALUES($valeur)");
+
+    }
+
+
+    public function modifier(string $set, string $where){
+   
+        $this->requete = $this->bdd->prepare("UPDATE {$this->table} SET $set WHERE $where");
+   
+    }
 }
 
 
