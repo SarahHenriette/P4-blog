@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form action="index.php?controller=administrateur&amp;task=nouveauAdministrateur" method="POST">
+<form action="index.php?controller=controllerAdministrateur&amp;task=nouveauAdministrateur" method="POST">
 
 <input type="text" name="nom"  placeholder="Nom">
 <input type="text" name="prenom"  placeholder="Prenom">

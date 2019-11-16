@@ -2,6 +2,7 @@
 
 class Renderer{
 public static function render(string $chemin,?array $variables = []){
+        
     extract($variables);
     ob_start();
     require('templates/'. $chemin . '.html.php');

@@ -1,57 +1,58 @@
-
-
-    <header></header>
     <nav></nav>
     <section>
-        <h1>Billet simple pour l'Alaska de Jean Forteroche</h1>
+        <h1>Bienvenue dans votre espace Administrateur</h1>
     </section>
     <section>
         
-    <a href="index.php?controller=administrateur&amp;task=deconnexion">deconnexion</a>
+    <a href="index.php?controller=controllerAdministrateur&amp;task=deconnexion">deconnexion</a>
+    <div  id="listeBillet">
 <?php
 
 
-//Je vérifie le mot de passe du formulaire avec celui de la bas de donnee
-$motDePasseCorrect = password_verify( $_POST['motDePasse'], $admin["motDePasse"]);
-
-//si les donnees ne sont pas bonnes redirige vers la page d'accueil
-if(!$admin){
-    \Http::redirection('index.php');
-}else{ //sinon sii c'est correct alors sauvergarde les donnees du formulaire dans une session et j'affiche les billets
-    if($motDePasseCorrect){
-        
- 
-        $_SESSION['nom'] = $_POST['nom'];
-        $_SESSION['mdp'] = $_POST['motDePasse'];
-        if($_SESSION['nom'] && $_SESSION['mdp']){
-        echo "Vous etes connecté";
-        }
-    while($donnee = $billets->fetch()){
+foreach($billets as $billet){;
     ?>
-        <div class="chapitre">
-            <div class="billet">
+        <div class="chapitreAdmin">
+            <div class="billetAdmin">
     
-                <h2><?php echo $donnee["titre"];?> </h2>
-                <p><?php echo $donnee["date_creation"];?></p>
-                <p> <?php echo $donnee["contenue"];?></p>
+                <h2><?php echo $billet["titre"];?> </h2>
+                <p><?php echo $billet["date_creation"];?></p>
+                <p> <?php echo $billet["contenue"];?></p>
             </div>
-            <a href="index.php?controller=billet&amp;task=supprimer&amp;billet=<?php echo $donnee["id"];?> " >supprimer</a>
-            <a href="index.php?controller=billet&amp;task=modifier&amp;billet=<?php echo $donnee["id"];?>">modifier</a>
-            <a href="index.php?controller=billet&amp;task=afficheChapitreEtCommentaire&amp;billet=<?php echo $donnee["id"];?>">commentaires</a>
+            <a href="index.php?controller=controllerBillet&amp;task=supprimer&amp;billet=<?php echo $billet["id"];?> " >supprimer</a>
+            <a href="index.php?controller=controllerBillet&amp;task=modifier&amp;billet=<?php echo $billet["id"];?>">modifier</a>
+            <a href="index.php?controller=controllerBillet&amp;task=afficheChapitreEtCommentaire&amp;billet=<?php echo $billet["id"];?>">commentaires</a>
         </div>
         <?php
-    }
-}
+    
 }
         ?>   
-    <a href="index.php?controller=billet&amp;task=creer" >Creer un nouveau chapitre</a>
-      <?php     
-  
+    </div>
+    <a href="index.php?controller=controllerBillet&amp;task=creer" >Creer un nouveau chapitre</a>
 
+<h2>Commentaire signale</h2>
+<div id="signalement">
+      <?php     
+foreach($commentairesSignale as $commentaireSignale){;
+
+  
+if($commentaireSignale['signalement']>= 4){
+  ?>
+<div class="signalement">
+    <?php echo "vous avez un commentaire signalé"?>
+    <h2><?php echo $commentaireSignale["pseudo"];?> </h2>
+    <p><?php echo $commentaireSignale["commentaire"];?></p>
+    <p> <?php echo $commentaireSignale["date_commentaire"];?></p>
+    <a href="index.php">supprimer</a>
+    <a href="index.php">concerver</a>
+
+</div>
+  <?php
+}
+};
 
 ?>
 
-     
+     </div>
 
     </section>
     <section></section>

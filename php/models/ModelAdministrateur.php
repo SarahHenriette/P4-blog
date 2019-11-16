@@ -3,16 +3,11 @@
 namespace Models;
 
 
-class Administrateur extends Model{
+class ModelAdministrateur extends Model{
 
     protected $table = "administrateur";
 
 
-    public function recupereTout(){
-        $this->requete= $this->bdd->query("SELECT * FROM {$this->table}");
-        return $this->requete;
-
-    }
 
    
     public function transmetValeurPourAjouter(){

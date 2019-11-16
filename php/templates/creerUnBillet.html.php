@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="index.php?controller=billet&amp;task=creerPost" method="POST" class="nouveauBillet">
+    <form action="index.php?controller=controllerBillet&amp;task=creerPost" method="POST" class="nouveauBillet">
     <label name="titre">Titre</label>
     <input type="text" name="Titre" id="titre">
     <label name="contenu">Contenu</label>

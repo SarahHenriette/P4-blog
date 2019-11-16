@@ -15,14 +15,19 @@ abstract class Model{
 
 
 
-    public function recupereTout(){
-        $this->requete= $this->bdd->query("SELECT * FROM {$this->table} ORDER BY date_creation DESC");
+    public function recupereTout(string $orderBy){
+        $this->requete= $this->bdd->query("SELECT * FROM {$this->table} ORDER BY $orderBy");
+        $donnees = $this->requete->fetchAll();
+        return $donnees;
+
+    }
+   
+    public function recupereId(string $orderBy){
+        $this->requete= $this->bdd->query("SELECT id FROM {$this->table} ORDER BY $orderBy");
         return $this->requete;
 
     }
-
-
-    public function recupereUn(?string$where="",$id){
+    public function recupereUn(?string$where="",$id,$booleen){
 
     $req="SELECT * FROM {$this->table}";
 
@@ -32,8 +37,13 @@ abstract class Model{
 
         $this->requete =$this->bdd->prepare($req);
         $this->requete->execute(array( $id));
-      return $this->requete;
-
+ 
+    if($booleen){
+        $donnee = $this->requete->fetch();
+    }else{
+        $donnee = $this->requete->fetchAll();
+    }
+    return $donnee;
     }
 
     public function supprimer($id){
@@ -42,17 +52,32 @@ abstract class Model{
     }
 
 
-    public function ajouter(string $champ, string $valeur){
+    public function ajouter(string $champ, string $valeur, array $donnee){
         $this->requete = $this->bdd->prepare("INSERT INTO {$this->table} ($champ) VALUES($valeur)");
-
+        $this->requete->execute($donnee);
     }
 
+    
 
-    public function modifier(string $set, string $where){
+
+    public function modifier(string $set, string $where,array $donnee){
    
         $this->requete = $this->bdd->prepare("UPDATE {$this->table} SET $set WHERE $where");
-   
+        $this->requete->execute($donnee);
     }
+
+        
+
+
+    public function pagination(string $orderBy, $limitDepart, $limitFin){
+        $this->requete = $this->bdd->query("SELECT * FROM {$this->table} ORDER BY $orderBy DESC LIMIT $limitDepart, $limitFin");
+        $donnees = $this->requete->fetchAll();
+        return $donnees;
+    }
+
+  
+   
+
 }
 
 
