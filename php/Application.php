@@ -6,11 +6,11 @@ class Application{
         $controllerName = "ControllerBillet";
         $task ="index";
 
-        if(!empty($_GET['controller'])){
-            $controllerName = ucfirst($_GET['controller']);
+        if(htmlspecialchars(!empty($_GET['controller']))){
+            $controllerName = ucfirst(htmlspecialchars($_GET['controller']));
         }
-        if(!empty($_GET['task'])){
-            $task = $_GET['task'];
+        if(htmlspecialchars(!empty($_GET['task']))){
+            $task = htmlspecialchars($_GET['task']);
         }
         $controllerName = "\controllers\\". $controllerName;
         $controller = new $controllerName();

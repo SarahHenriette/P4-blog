@@ -20,10 +20,10 @@ $req = $this->billets->recupereId("date_creation");
 $nbrbillets = $req->rowCount();
 $pageTotal = ceil($nbrbillets/$billetParPage);
 
-if(isset($_GET['page']) AND !empty($_GET['page'])){
+if(htmlspecialchars(isset($_GET['page'])) AND htmlspecialchars(!empty($_GET['page']))){
     $_GET['page']=intval($_GET['page']);
 
-    $pageCourante = $_GET['page'];
+    $pageCourante = htmlspecialchars($_GET['page']);
 
 } else{
     $pageCourante = 1; 
@@ -39,15 +39,15 @@ $billets = $this->billets->pagination("date_creation", $depart, $billetParPage);
 //Affiche  un seul billet et ses commentaires
 function afficheChapitreEtCommentaire(){    
 $Commentaire = new \Models\ModelCommentaire;
-$commentaires = $Commentaire->recupereUn("id_billet=?",$_GET["billet"], $booleen=false);
-$billet = $this->billets->recupereUn("id=?",$_GET["billet"], $booleen =true);
+$commentaires = $Commentaire->recupereUn("id_billet=?",htmlspecialchars($_GET["billet"]), $booleen=false);
+$billet = $this->billets->recupereUn("id=?",htmlspecialchars($_GET["billet"]), $booleen =true);
 \Renderer::render('afficheChapitreEtCommentaire', compact( 'billet','commentaires'));
 }
 
 
 //Modifie un billet
 function modifier(){
-$donnee = $this->billets->recupereUn("id=?",$_GET["billet"], $booleen = true);
+$donnee = $this->billets->recupereUn("id=?",htmlspecialchars($_GET["billet"]), $booleen = true);
 \Renderer::render('modifier',compact('donnee'));
 //\Http::redirection('index.php?controller=billet&task=pageAdmin');
 }
@@ -59,8 +59,8 @@ function creer(){
 //creer un billet
 function creerPost(){
 $donnee= array(
-    "titre" => $_POST["Titre"],
-    "contenue" => $_POST["Contenue"],
+    "titre" => htmlspecialchars($_POST["Titre"]),
+    "contenue" => htmlspecialchars($_POST["Contenue"]),
 );
 $this->billets->ajouter("titre, contenue, date_creation", ":titre, :contenue, NOW()",$donnee);
 \Http::redirection('index.php?controller=controllerAdministrateur&task=pageAdmin');
@@ -70,9 +70,9 @@ $this->billets->ajouter("titre, contenue, date_creation", ":titre, :contenue, NO
 
 function modifierPost(){
     $donnee =array(
-        "titre" => $_POST["titre"],
-        "contenue" => $_POST["contenue"],
-        "id" => $_POST["billet"]
+        "titre" => htmlspecialchars($_POST["titre"]),
+        "contenue" => htmlspecialchars($_POST["contenue"]),
+        "id" => htmlspecialchars($_POST["billet"])
     );
     
     $this->billets->modifier("titre= :titre, contenue= :contenue, date_creation= NOW()", "id=:id", $donnee);
@@ -83,7 +83,7 @@ function modifierPost(){
 function supprimer(){
 
     
-    $this->billets->supprimer($_GET["billet"]);
+    $this->billets->supprimer(htmlspecialchars($_GET["billet"]));
     \Http::redirection('index.php?controller=controllerAdministrateur&task=pageAdmin');
 
 }

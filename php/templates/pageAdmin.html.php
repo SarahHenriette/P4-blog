@@ -42,7 +42,7 @@ if($commentaireSignale['signalement']>= 4){
     <h2><?php echo $commentaireSignale["pseudo"];?> </h2>
     <p><?php echo $commentaireSignale["commentaire"];?></p>
     <p> <?php echo $commentaireSignale["date_commentaire"];?></p>
-    <a href="index.php">supprimer</a>
+    <a href="index.php?controller=controllerBillet&amp;task=supprimer&amp;commentaire=<?php echo $commentaireSignale["id"];?>">supprimer</a>
     <a href="index.php">concerver</a>
 
 </div>

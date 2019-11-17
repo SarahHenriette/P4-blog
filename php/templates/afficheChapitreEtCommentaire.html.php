@@ -30,7 +30,7 @@ $Billets = new \Models\ModelBillet;
   <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo">
   <textarea name="message" cols="20" rows="1" placeholder="Message..."></textarea>
   <input type="submit" name="Valider" id="Valider" value="Valider">
-  <input type="hidden" name="billet" value=" <?php echo $_GET['billet'];?>"/>
+  <input type="hidden" name="billet" value=" <?php echo htmlspecialchars($_GET['billet']);?>"/>
 </form>
 </div>
 </div>

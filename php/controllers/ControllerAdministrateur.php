@@ -17,13 +17,13 @@ class ControllerAdministrateur{
         //Je récupére les donnees de l'administrateur
         
         $administrateur = new \Models\ModelAdministrateur;
-        $admin = $administrateur->recupereUn("nom = ?",$_POST['nom'], $booleen=true);
+        $admin = $administrateur->recupereUn("nom = ?",htmlspecialchars($_POST['nom']), $booleen=true);
         //Je vérifie le mot de passe du formulaire avec celui de la bas de donnee
-        $motDePasseCorrect = password_verify( $_POST['motDePasse'], $admin["motDePasse"]);
+        $motDePasseCorrect = password_verify( htmlspecialchars($_POST['motDePasse']), $admin["motDePasse"]);
       
         if($motDePasseCorrect){
             session_start();
-            $_SESSION['admin']=$_POST['nom'];
+            htmlspecialchars($_SESSION['admin'])=htmlspecialchars($_POST['nom']);
     
             \Http::redirection('index.php?controller=controllerAdministrateur&task=pageAdmin');
             
@@ -42,7 +42,7 @@ class ControllerAdministrateur{
             session_start();
        
             //echo $_SESSION['admin'];
-                if(!empty($_SESSION['admin'])){
+                if(!empty(htmlspecialchars($_SESSION['admin'])){
          
                 $billets = $this->billets->recupereTout("date_creation");
                 //récupere les commentaires signales
@@ -57,7 +57,7 @@ class ControllerAdministrateur{
             
     function deconnexion(){
         session_start();
-        unset($_SESSION['admin']);
+        unset(htmlspecialchars($_SESSION['admin']));
         
         \Http::redirection('index.php');
     }

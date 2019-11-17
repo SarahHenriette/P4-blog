@@ -1,31 +1,221 @@
-.Chapitre{
-    background-color:rgb(124, 196, 130);
+body{
+
 }
 
-.chapitre{
-    background-color:rgb(235, 218, 192);
-    width: 50%;
-    height: 300px;
-    margin-bottom: 20px ;
+footer{
+    height: 200px;
+    background-color: rgb(209, 177, 177);
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+nav li{
+    margin:5px 10px;
+}
+
+/**************************************PAGE INDEX*******************************************************/
+header{
+    background-color: seashell;
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+header img{
+   width: 100%;
+}
+ nav{
+     position: absolute;
+     z-index: 3;
+ }
+#presentation{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#textePresentation{
+    width: 100%;
+
+    background-color:rgb(204, 227, 238) ;   
+    text-align: center;
+    padding: 10px 0;
+    
+}
+
+#textePresentation img{
+ 
+}
+
+#textePresentation p {
+    margin-top:0;
+   
+}
+
+#connexionAdmin{
+    height: 50px;
+    top:0;
+    position: absolute;
+    right: 5px;
+}
+.chapitres{
+    background-color: rgb(193, 203, 233);
+   margin: 0 20px 26px 20px;
+   width: 44%;
+   height: 262px;
+
 }
 
 .billet{
     overflow: hidden;
-    background-color: sandybrown;
-    height: 275px;
+ 
+    height: 230px;
+  
     
 }
 
-.commentaire{
-    background-color: salmon;
-    width: 50%;
-    height: 100px;
-}
 
 .nouveauBillet{
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 50%;
+  
 
+}
+
+#affichage{
+    display: flex;
+    flex-direction: row;
+
+    height: 600px;
+    margin-top: 20px;
+}
+
+#couverture{
+    background-color: rgb(193, 203, 233);
+    width: 30%;
+    height: 600px;
+    margin: 0 45px;
+}
+
+#listeBillets{
+
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 600px;
+    margin-top: 5%;
+}
+#listeChapitre{
+       display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 580px;
+    
+}
+.signalement{
+    width: 400px;
+    height: 200px;
+    background-color: seagreen;
+}
+
+#illustration img{
+    height: 450px;
+    width: 100%;
+    display: flex;
+   margin : auto;
+    
+}
+
+h1{
+    text-align: center;
+}
+
+
+
+/*************************************************PAGE AMDIN***********************************************************************/
+
+#listeBillet{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.chapitreAdmin{
+    width: 30%;
+    height: 200px;
+    margin: 40px auto;
+}
+
+.billetAdmin{
+    overflow: hidden;
+ 
+    height: 230px;
+    background-color: rgb(193, 203, 233);
+}
+
+
+/*************************************************PAGE affiche CHAPITRE ET COMMENTAIRES***********************************************************************/
+
+
+.chapitre{
+    background-color: rgb(193, 203, 233); 
+
+    width: 80%;
+    margin: 0 auto;
+}
+
+.commentaire{
+    background-color: salmon;
+
+    height: 100px;
+}
+
+
+#espaceCommentaire{
+ 
+}
+
+#commentaires{
+    width: 50%;
+    background-color: tomato;
+
+}
+
+#formulaireCommentaire{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+}
+
+
+#formulaireCommentaire h3{
+    text-align: center;
+}
+
+#formulaireCommentaire form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   margin: 0 auto;
+}
+
+#formulaireCommentaire form textarea{
+    border-top :none;
+    border-left: none;
+    border-right: none;
 }
