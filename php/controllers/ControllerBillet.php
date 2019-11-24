@@ -32,18 +32,28 @@ if(htmlspecialchars(isset($_GET['page'])) AND htmlspecialchars(!empty($_GET['pag
 
 $depart = ($pageCourante-1)*$billetParPage;
 $billets = $this->billets->pagination("date_creation", $depart, $billetParPage);
-\Renderer::render('index', compact('billets', 'pageTotal', 'pageCourante','s'));
+
+$dernierBillet = $this->billets->recupereTout("date_creation",$booleen=true);
+\Renderer::render('index', compact('billets', 'pageTotal', 'pageCourante','s',"dernierBillet"));
 
 }
+
 
 //Affiche  un seul billet et ses commentaires
 function afficheChapitreEtCommentaire(){    
-$Commentaire = new \Models\ModelCommentaire;
-$commentaires = $Commentaire->recupereUn("id_billet=?",htmlspecialchars($_GET["billet"]), $booleen=false);
-$billet = $this->billets->recupereUn("id=?",htmlspecialchars($_GET["billet"]), $booleen =true);
-\Renderer::render('afficheChapitreEtCommentaire', compact( 'billet','commentaires'));
-}
+    $Commentaire = new \Models\ModelCommentaire;
+    $commentaires = $Commentaire->recupereUn("id_billet=?",htmlspecialchars($_GET["billet"]), $booleen=false);
+    $billet = $this->billets->recupereUn("id=?",htmlspecialchars($_GET["billet"]), $booleen =true);
+    \Renderer::render('afficheChapitreEtCommentaire', compact( 'billet','commentaires'));
+    }
 
+    function afficheChapitreEtCommentaireAdmin(){    
+        $Commentaire = new \Models\ModelCommentaire;
+        $commentaires = $Commentaire->recupereUn("id_billet=?",htmlspecialchars($_GET["billet"]), $booleen=false);
+        $billet = $this->billets->recupereUn("id=?",htmlspecialchars($_GET["billet"]), $booleen =true);
+        \Renderer::render('afficheChapitreEtCommentaireAdmin', compact( 'billet','commentaires'));
+        }
+    
 
 //Modifie un billet
 function modifier(){
@@ -83,9 +93,10 @@ function modifierPost(){
 function supprimer(){
 
     
-    $this->billets->supprimer(htmlspecialchars($_GET["billet"]));
+    $this->billets->supprimer(htmlspecialchars($_GET["billet"]),"id=?");
+    $Commentaire = new \Models\ModelCommentaire;
+    $commentaires = $Commentaire->supprimer(htmlspecialchars($_GET["billet"]),"id_billet=?");
     \Http::redirection('index.php?controller=controllerAdministrateur&task=pageAdmin');
-
 }
 
 

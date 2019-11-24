@@ -11,7 +11,9 @@ class ControllerAdministrateur{
         
     }//construct
 
-
+function formConnexion(){
+    \Renderer::render('connexionAdministrateur', compact('billets','donneeAdministrateur'));
+}
   
     function connexionPageAdmin(){
         //Je récupére les donnees de l'administrateur
@@ -23,7 +25,7 @@ class ControllerAdministrateur{
       
         if($motDePasseCorrect){
             session_start();
-            htmlspecialchars($_SESSION['admin'])=htmlspecialchars($_POST['nom']);
+           $_SESSION['admin']=htmlspecialchars($_POST['nom']);
     
             \Http::redirection('index.php?controller=controllerAdministrateur&task=pageAdmin');
             
@@ -42,22 +44,28 @@ class ControllerAdministrateur{
             session_start();
        
             //echo $_SESSION['admin'];
-                if(!empty(htmlspecialchars($_SESSION['admin'])){
+                if(!empty($_SESSION['admin'])){
          
                 $billets = $this->billets->recupereTout("date_creation");
                 //récupere les commentaires signales
                 $Commentaire = new \Models\ModelCommentaire;
                 $commentairesSignale = $Commentaire->recupereTout("date_commentaire");
+
+                $Administrateur = new \Models\ModelAdministrateur;
+                $donneeAdministrateur = $Administrateur->recupereTout("id", true);
             }else{
                \Http::redirection('index.php');
             }
         //Je recupere les billets pour les afficher
-        \Renderer::render('pageAdmin', compact('billets', 'commentairesSignale'));
+        \Renderer::render('pageAdmin', compact('billets','donneeAdministrateur'));
+        
         }
+
+     
             
     function deconnexion(){
         session_start();
-        unset(htmlspecialchars($_SESSION['admin']));
+        unset($_SESSION['admin']);
         
         \Http::redirection('index.php');
     }
@@ -65,6 +73,6 @@ class ControllerAdministrateur{
     function nouveauAdministrateur(){
     $administrateur = new \Models\ModelAdministrateur;
     $administrateur->ajouter("nom, prenom, motDePasse", ":nom, :prenom, :motDePasse");
-    $administrateur->transmetValeurPourAjouter();
+    //$administrateur->transmetValeurPourAjouter();
     }
 }

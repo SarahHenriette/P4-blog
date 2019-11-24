@@ -101,7 +101,7 @@ header img{
 #couverture{
     background-color: rgb(193, 203, 233);
     width: 30%;
-    height: 600px;
+    height: 580px;
     margin: 0 45px;
 }
 
@@ -121,6 +121,7 @@ header img{
     justify-content: center;
     flex-wrap: wrap;
     height: 580px;
+    width: 50%;
     
 }
 .signalement{

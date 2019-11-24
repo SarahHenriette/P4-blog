@@ -15,10 +15,14 @@ abstract class Model{
 
 
 
-    public function recupereTout(string $orderBy){
-        $this->requete= $this->bdd->query("SELECT * FROM {$this->table} ORDER BY $orderBy");
-        $donnees = $this->requete->fetchAll();
-        return $donnees;
+    public function recupereTout(string $orderBy, $booleen=null){
+        $this->requete= $this->bdd->query("SELECT * FROM {$this->table} ORDER BY $orderBy ");
+        if($booleen){
+            $donnee = $this->requete->fetch();
+        }else{
+            $donnee = $this->requete->fetchAll();
+        }
+        return $donnee;
 
     }
    
@@ -46,8 +50,8 @@ abstract class Model{
     return $donnee;
     }
 
-    public function supprimer($id){
-        $this->requete = $this->bdd->prepare("DELETE FROM {$this->table} WHERE id=?");
+    public function supprimer($id, $where){
+        $this->requete = $this->bdd->prepare("DELETE FROM {$this->table} WHERE $where");
         $this->requete->execute(array($id));
     }
 

@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <form action="index.php?controller=controllerBillet&amp;task=creerPost" method="POST" class="nouveauBillet">
+<div id="imageChapitre">
+
+<img src="../alaska6.jpg" >
+</div>
+    <h1 id="nouveauChapitre">Nouveau chapitre</h1>
+    <form action="index.php?controller=controllerBillet&amp;task=creerPost" method="POST" class="nouveauBillet" id="creerUnChapitre">
     <label name="titre">Titre</label>
     <input type="text" name="Titre" id="titre">
     <label name="contenu">Contenu</label>
-    <textarea cols=50 rows=5 name="Contenue"></textarea>
-    <input type="submit" name="Valider" id="Valider" value="Valider">
+    <textarea cols=50 rows=5 name="Contenue" id="creer" class="textarea"></textarea>
+    <input type="submit" name="Valider" id="valider" value="Valider">
     </form>
+    <a href="index.php?controller=controllerAdministrateur&amp;task=pageAdmin" id="retourAccueilPageAdmin">Accueil</a>
 
-
-</body>
-</html>
 
 

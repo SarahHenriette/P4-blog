@@ -39,8 +39,7 @@ function signaler(){
         ));
     //Si le commentaire est à plus de 5 signalements alors le champ signalement revient à 0 et l'administrateur va recevoir un messagee (chose que je fais dans le controleur Billet)
     if($commentaireSignale['signalement'] >=4 ){
-        $commentaireSignale['signalement'] = 0;
-        $signalement = 1;
+      
     }else{
         echo "Le commentaire a bien été signalé";
     }
@@ -48,11 +47,18 @@ function signaler(){
 
 }
 
+//Pour afficher lee commentaire signale
+function commentaireSignale(){
+    $Commentaire = new \Models\ModelCommentaire;
+        $commentairesSignale = $Commentaire->recupereTout("date_commentaire");
+        \Renderer::render('commentaireSignale', compact('commentairesSignale'));
+}
+
 
 function supprimer(){
 
     
-    $this->commentaire->supprimer(htmlspecialchars($_GET["commentaire"]));
+    $this->commentaire->supprimer(htmlspecialchars($_GET["commentaire"]), "id=?");
     \Http::redirection('index.php?controller=controllerAdministrateur&task=pageAdmin');
 
 }
